@@ -1,0 +1,44 @@
+{
+  "name": "@jneander/browserslist-config",
+  "version": "1.0.0",
+  "description": "Personal browserslist configuration",
+  "license": "MIT",
+  "author": "Jeremy Neander <jeremy.neander@gmail.com>",
+  "main": "./index.js",
+  "files": [
+    "./index.js",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "lint:commits": "commitlint --from $(git symbolic-ref --short refs/remotes/origin/HEAD) --to HEAD",
+    "lint:prettier": "prettier --check .",
+    "lint:prettier:fix": "prettier --write .",
+    "prepare": "[ -z $CI ] && git config --local core.hooksPath .githooks || true",
+    "update:db": "browserslist --update-db"
+  },
+  "commitlint": {
+    "extends": "@jneander/commitlint-config"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,md}|package.json": "eslint --fix",
+    "*": "prettier --write --ignore-unknown"
+  },
+  "prettier": "@jneander/prettier-config",
+  "release": {
+    "extends": [
+      "@jneander/semantic-release-config"
+    ]
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.0.0",
+    "@jneander/commitlint-config": "^1.0.1",
+    "@jneander/prettier-config": "^1.0.0",
+    "@jneander/semantic-release-config": "^1.0.1",
+    "browserslist": "^4.21.4",
+    "lint-staged": "^13.0.0",
+    "prettier": "^2.8.0"
+  },
+  "engines": {
+    "node": ">= 12"
+  }
+}
